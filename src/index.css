@@ -1,0 +1,57 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@400;500;600;700&family=Outfit:wght@300;400;500;600&display=swap');
+@import 'tailwindcss';
+
+@theme inline {
+  --color-background: #0a0a0f;
+  --color-foreground: #f0f0f0;
+  --color-card: #111118;
+  --color-card-foreground: #f0f0f0;
+  --color-primary: #f5c400;
+  --color-primary-foreground: #0a0a0f;
+  --color-secondary: #1a1a28;
+  --color-secondary-foreground: #f0f0f0;
+  --color-muted: #1e1e2e;
+  --color-muted-foreground: #888;
+  --color-accent: #f5c400;
+  --color-accent-foreground: #0a0a0f;
+  --color-border: #222235;
+  --radius: 0.5rem;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #f5c400 #0a0a0f;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #0a0a0f;
+  color: #f0f0f0;
+  font-family: 'Outfit', sans-serif;
+}
+
+.font-display {
+  font-family: 'Orbitron', monospace;
+}
+
+.font-heading {
+  font-family: 'Rajdhani', sans-serif;
+}
+
+.glow-yellow {
+  text-shadow: 0 0 20px rgba(245, 196, 0, 0.6), 0 0 40px rgba(245, 196, 0, 0.3);
+}
+
+.glow-box {
+  box-shadow: 0 0 20px rgba(245, 196, 0, 0.15), 0 0 60px rgba(245, 196, 0, 0.05);
+}
+
+.grid-bg {
+  background-image:
+    linear-gradient(rgba(245, 196, 0, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(245, 196, 0, 0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
