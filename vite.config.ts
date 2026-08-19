@@ -6,40 +6,37 @@ import path from 'node:path'
 
 
 // Vite config — https://vitejs.dev/config/
-export default defineConfig(({ mode }) => {
-  // .figma/make/deploy-preview passes `--mode development` for cached-preview builds.
-  const emitSourcemaps = mode === 'development'
+const emitSourcemaps = process.env.NODE_ENV === 'development'
 
-  return {
-    base: process.env.FIGMA_PUBLIC_URL ? `${process.env.FIGMA_PUBLIC_URL}/` : '/',
-    build: {
-      sourcemap: emitSourcemaps ? 'inline' : false,
-      minify: !emitSourcemaps,
+export default defineConfig({
+  base: process.env.FIGMA_PUBLIC_URL ? `${process.env.FIGMA_PUBLIC_URL}/` : '/',
+  build: {
+    sourcemap: emitSourcemaps ? 'inline' : false,
+    minify: !emitSourcemaps,
+  },
+  plugins: [
+    react(),
+    tailwindcss(),
+    figmaSiteConfiguration({}),
+    figmaErrorOverlayReplay(),
+    figmaReactRefreshBoundaryFallback(),
+    figmaMakeKitPlugin({ storiesGlob: '/src/**/*.stories.{ts,tsx,js,jsx}' }),
+  ],
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, './src'),
     },
-    plugins: [
-      react(),
-      tailwindcss(),
-      figmaSiteConfiguration({}),
-      figmaErrorOverlayReplay(),
-      figmaReactRefreshBoundaryFallback(),
-      figmaMakeKitPlugin({ storiesGlob: '/src/**/*.stories.{ts,tsx,js,jsx}' }),
-    ],
-    resolve: {
-      alias: {
-        '@': path.resolve(__dirname, './src'),
-      },
-    },
-    server: {
-      host: '0.0.0.0',
-      port: parseInt(process.env.PORT || '8443'),
-      strictPort: true,
-      watch: { ignored: ['**/.figma/**'] },
-    },
-    preview: {
-      host: '0.0.0.0',
-      port: parseInt(process.env.PORT || '8443'),
-    },
-  }
+  },
+  server: {
+    host: '0.0.0.0',
+    port: parseInt(process.env.PORT || '8443'),
+    strictPort: true,
+    watch: { ignored: ['**/.figma/**'] },
+  },
+  preview: {
+    host: '0.0.0.0',
+    port: parseInt(process.env.PORT || '8443'),
+  },
 })
 
 type FigmaSiteConfiguration = {
